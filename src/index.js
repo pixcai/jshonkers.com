@@ -1,26 +1,9 @@
-import Koa from 'koa'
+import JSHonkers from './Index'
 import mount from 'koa-mount'
-import Router from 'koa-router'
-
 import IM from '../builtins/IM'
-import Index from './Index'
+import config from '../jshonkers.config'
 
-import IMPug from '../views/IM'
-import IndexPug from '../views/Index'
+const app = new JSHonkers()
 
-import globalConfig from '../jshonkers.config'
-
-class JSHonkers extends Koa {
-  constructor(router) {
-    super()
-
-    this.use(router.routes())
-    	.use(router.allowedMethods())
-  }
-}
-
-const router = new Router()
-router.get(Index.url, async ctx => ctx.body = IndexPug())
-
-const app = new JSHonkers(router)
-app.use(mount(IM.url, new IM())).listen(globalConfig.server.port)
+app.use(mount(IM.mountPath, new IM(app)))
+app.listen(config.serverConfig.port)

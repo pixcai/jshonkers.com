@@ -17,5 +17,8 @@ export default {
     extensions: ['', '.js', '.jsx', '.json', '.pug']
   },
   target: 'node',
-  externals: [/koa(?=-.+)*/, 'socket.io']
+  node: {
+    __dirname: true
+  },
+  externals: [/koa(?=-.+)*/, /socket\.io/]
 }

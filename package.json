@@ -4,9 +4,9 @@
   "description": "A technical community concerned with JavaScript",
   "main": "index.js",
   "scripts": {
-    "test": "node --harmony index.js",
+    "test": "node --use_strict --harmony index.js",
     "build": "webpack",
-    "start": "node --harmony index.js"
+    "start": "node --use_strict --harmony index.js"
   },
   "repository": {
     "type": "git",
@@ -33,15 +33,16 @@
     "babel-preset-stage-3": "^6.11.0",
     "eslint": "^3.2.2",
     "eslint-loader": "^1.5.0",
-    "pug-loader": "^2.1.0",
-    "pug-walk": "0.0.3",
     "webpack": "^1.13.1"
   },
   "dependencies": {
-    "angular": "^1.5.8",
     "koa": "^2.0.0",
     "koa-mount": "^2.0.0",
     "koa-router": "^7.0.1",
+    "koa-static": "^3.0.0",
+    "pug": "^2.0.0-beta4",
+    "pug-loader": "^2.2.1",
+    "pug-walk": "0.0.3",
     "socket.io": "^1.4.8"
   }
 }

@@ -1,5 +1,5 @@
 export default {
-	server: {
+	serverConfig: {
 		port: 3000
 	}
 }
