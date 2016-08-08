@@ -1,9 +1,9 @@
-import JSHonkers from './Index'
+import JSHonkers from './Index/index'
 import mount from 'koa-mount'
-import IM from '../builtins/IM'
+import Chat from '../builtins/chat'
 import config from '../jshonkers.config'
 
 const app = new JSHonkers()
 
-app.use(mount(IM.mountPath, new IM(app)))
+app.use(mount(Chat.MOUNT_PATH, new Chat(app)))
 app.listen(config.serverConfig.port)

@@ -1,0 +1,22 @@
+extends ../../../views/base
+
+block styles
+	link(
+		rel="stylesheet"
+		href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"
+	)
+	link(
+		rel="stylesheet"
+		href="//cdn.bootcss.com/flexboxgrid/6.3.0/flexboxgrid.min.css"
+	)
+	link(
+		rel="stylesheet"
+		href=__MOUNT_PATH__ + "/css/chat.min.css"
+	)
+
+include components/content
+
+block scripts
+	script(src="//cdn.bootcss.com/vue/1.0.26/vue.min.js")
+	script(src="//cdn.bootcss.com/socket.io/1.4.8/socket.io.min.js")
+	script(src=__MOUNT_PATH__ + "/js/client.min.js")

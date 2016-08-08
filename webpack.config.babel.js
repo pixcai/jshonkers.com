@@ -9,7 +9,7 @@ export default {
   },
   module: {
     loaders: [
-      { test: /\.js$/, loader: 'eslint!babel', exclude: /node_modules/ },
+      { test: /\.js$/, loader: 'babel!eslint', exclude: /node_modules/ },
       { test: /\.pug$/, loader: 'pug' }
     ]
   },
