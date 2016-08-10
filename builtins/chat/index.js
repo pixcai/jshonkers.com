@@ -1,18 +1,26 @@
 import App from '../../lib/App'
-import router from './src/router'
-import serve from '../../lib/serve'
-import server from './src/server'
+import Serve from '../../lib/Serve'
+import Router from '../../lib/Router'
+
+import Routes from './src/Routes'
+import Server from './src/Server'
+
 import config from './chat.config'
+
 
 export default class Chat extends App {
 	constructor(srv) {
 		super()
 
-		this.use(serve(config.__PUBLIC__))
+		const router = Router.fromRoutes(Routes({
+			__MOUNT_PATH__: Chat.MOUNT_PATH
+		}))
+
+		this.use(Serve(config.__PUBLIC__))
 			.use(router.routes())
 			.use(router.allowedMethods())
 
-		server().attach(srv)
+		server()
 	}
 
 	static set MOUNT_PATH(path) {
