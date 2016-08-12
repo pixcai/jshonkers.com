@@ -723,7 +723,7 @@ module.exports =
 
 			_this.use((0, _serve2.default)(_chat2.default.__PUBLIC__)).use(router.routes()).use(router.allowedMethods());
 
-			(0, _server2.default)(_chat2.default.serverConfig);
+			(0, _server2.default)(_chat2.default.tplVars.__MOUNT_PATH__, _chat2.default.serverConfig);
 			return _this;
 		}
 
@@ -754,16 +754,12 @@ module.exports =
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _chat = __webpack_require__(23);
-
-	var _chat2 = _interopRequireDefault(_chat);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = function (opts) {
+	exports.default = function (nsp, opts) {
 		return Object.keys(_events2.default).reduce(function (io, event) {
-			return io.of(_chat2.default.tplVars.__MOUNT_PATH__).on(event, _events2.default[event]);
-		}, new _socket2.default(_index2.default, opts));
+			return io.on(event, _events2.default[event]);
+		}, new _socket2.default(_index2.default, opts).of(nsp));
 	};
 
 /***/ },

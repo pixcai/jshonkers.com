@@ -18,7 +18,7 @@ class Chat extends LibApp {
 			.use(router.routes())
 			.use(router.allowedMethods())
 
-		server(config.serverConfig)
+		server(config.tplVars.__MOUNT_PATH__, config.serverConfig)
 	}
 }
 
