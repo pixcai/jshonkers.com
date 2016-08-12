@@ -1,13 +1,12 @@
-import Route from '../../../util/Route'
-import Render from '../../../util/Render'
+import renderTpl from '../../../util/renderTpl'
+import indexPage from '../../../views/Index'
+
 import config from '../../../jshonkers.config'
-import indexTpl from '../../../views/Index'
 
 
-const render = (tpl, tplVars={}) => {
-	return Render(tpl, Object.assign(tplVars, config.tplVars))
+const render = tpl => renderTpl(tpl, config.tplVars)
+
+
+export default {
+	'/': [['GET'], render(indexPage)]
 }
-
-export default opts => [
-	Route('GET', '/', render(indexTpl, opts))
-]

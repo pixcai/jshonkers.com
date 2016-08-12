@@ -1,5 +1,7 @@
-const client = window.io(location.origin, { path: location.pathname })
+const socket = window.io(location.origin, {
+	path: location.pathname
+})
 
-client.on('connection', () => {
+socket.on('connection',() => {
 	console.log('connected successful!')
 })

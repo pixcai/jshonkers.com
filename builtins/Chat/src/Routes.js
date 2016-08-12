@@ -1,13 +1,12 @@
-import Route from '../../../util/Route'
-import Render from '../../../util/Render'
-import indexTpl from '../views'
+import renderTpl from '../../../util/renderTpl'
+import indexPage from '../views'
+
 import config from '../chat.config'
 
 
-const render = (tpl, tplVars={}) => {
-	return Render(tpl, Object.assign(tplVars, config.tplVars))
-}
+const render = tpl => renderTpl(tpl, config.tplVars)
 
-export default opts => [
-	Route('GET', '/', render(indexTpl, opts))
-]
+
+export default {
+	'/': [['GET', 'POST'], render(indexPage)]
+}

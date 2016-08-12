@@ -1,26 +1,13 @@
-import App from '../../lib/App'
-import Serve from '../../lib/Serve'
-import Routes from './src/Routes'
+import app from './src/app'
 import { createServer } from 'http'
 
-// use for built-in modules
-import Mount from 'koa-mount'
-import Chat from '../../builtins/Chat'
+import mount from 'koa-mount'
+import chat from '../../builtins/chat'
 
-import config from '../../jshonkers.config'
+import config from '../../builtins/chat/chat.config'
 
 
-const router = Router.fromRoutes(Routes({
-	__CHAT_PATH__: Chat.MOUNT_PATH
-}))
-const app = new App()
+app.use(mount(config.tplVars.__MOUNT_PATH__, chat))
 
-app
-	.use(Serve(process.cwd() + config.__PUBLIC__))
-	.use(router.routes())
-	.use(router.allowedMethods())
-
-// mount built-in modules
-app.use(Mount(Chat.MOUNT_PATH, new Chat()))
 
 export default createServer(app.callback())

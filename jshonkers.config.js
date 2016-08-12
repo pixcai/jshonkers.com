@@ -1,11 +1,12 @@
-import Chat from './builtins/chat'
+import chatConfig from './builtins/chat/chat.config'
+
 
 export default {
+	__PUBLIC__: `${process.cwd()}/${__dirname}/public`,
 	serverConfig: {
 		port: 3000
 	},
-	__PUBLIC__: `${__dirname}/public`,
 	tplVars: {
-		__CHAT_PATH__: Chat.MOUNT_PATH
+		__CHAT_PATH__: chatConfig.tplVars.__MOUNT_PATH__
 	}
 }
