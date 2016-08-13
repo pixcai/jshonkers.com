@@ -655,7 +655,7 @@ module.exports =
 			serveClient: false
 		}
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, "builtins\\chat"))
+	/* WEBPACK VAR INJECTION */}.call(exports, "builtins/chat"))
 
 /***/ },
 /* 24 */
