@@ -687,7 +687,11 @@ module.exports =
 
 	var _serve2 = _interopRequireDefault(_serve);
 
-	var _server = __webpack_require__(27);
+	var _events = __webpack_require__(27);
+
+	var _events2 = _interopRequireDefault(_events);
+
+	var _server = __webpack_require__(28);
 
 	var _server2 = _interopRequireDefault(_server);
 
@@ -723,7 +727,8 @@ module.exports =
 
 			_this.use((0, _serve2.default)(_chat2.default.__PUBLIC__)).use(router.routes()).use(router.allowedMethods());
 
-			(0, _server2.default)(_chat2.default.serverConfig);
+			_this.io = (0, _server2.default)(_chat2.default.serverConfig);
+			(0, _events2.default)(_this.io.of(_chat2.default.tplVars.__MOUNT_PATH__));
 			return _this;
 		}
 
@@ -734,46 +739,6 @@ module.exports =
 
 /***/ },
 /* 27 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _socket = __webpack_require__(28);
-
-	var _socket2 = _interopRequireDefault(_socket);
-
-	var _events = __webpack_require__(29);
-
-	var _events2 = _interopRequireDefault(_events);
-
-	var _index = __webpack_require__(6);
-
-	var _index2 = _interopRequireDefault(_index);
-
-	var _chat = __webpack_require__(23);
-
-	var _chat2 = _interopRequireDefault(_chat);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = function (opts) {
-		return Object.keys(_events2.default).reduce(function (io, event) {
-			return io.of(_chat2.default.tplVars.__MOUNT_PATH__).on(event, _events2.default[event]);
-		}, new _socket2.default(_index2.default, opts));
-	};
-
-/***/ },
-/* 28 */
-/***/ function(module, exports) {
-
-	module.exports = require("socket.io");
-
-/***/ },
-/* 29 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -781,12 +746,48 @@ module.exports =
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.default = {
+	var events = {
 		connection: function connection(socket) {
 			console.log('client connected ...');
 			socket.emit('connection');
 		}
 	};
+
+	exports.default = function (source) {
+		return Object.keys(events).reduce(function (source, event) {
+			return source['on'](event, events[event]);
+		}, source);
+	};
+
+/***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _socket = __webpack_require__(29);
+
+	var _socket2 = _interopRequireDefault(_socket);
+
+	var _index = __webpack_require__(6);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (opts) {
+	  return new _socket2.default(_index2.default, opts);
+	};
+
+/***/ },
+/* 29 */
+/***/ function(module, exports) {
+
+	module.exports = require("socket.io");
 
 /***/ },
 /* 30 */

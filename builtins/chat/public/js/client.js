@@ -1,6 +1,4 @@
-const socket = window.io(location.origin, {
-	path: location.pathname
-})
+const socket = window.io({ path: location.pathname })
 
 socket.on('connection',() => {
 	console.log('connected successful!')
